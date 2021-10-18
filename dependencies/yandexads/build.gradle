@@ -1,0 +1,32 @@
+apply plugin: 'com.android.library'
+
+android {
+	sourceSets {
+		main {
+			manifest.srcFile 'AndroidManifest.xml'
+			java.srcDirs = ['src']
+			res.srcDirs = ['res']
+		}
+	}
+	
+	compileSdkVersion Integer.parseInt(project.ANDROID_BUILD_SDK_VERSION)
+	buildToolsVersion project.ANDROID_BUILD_TOOLS_VERSION
+}
+
+dependencies {
+	
+	compile project(':deps:extension-api')
+
+	implementation "com.yandex.android:mobileads:${rootProject.ext.yandexMobilAds}"
+	implementation "com.yandex.android:mobmetricalib:${rootProject.ext.yandexMobmetricalib}"
+
+	implementation "com.google.android.gms:play-services-ads:${rootProject.ext.playServicesAds}"
+	implementation "com.facebook.android:audience-network-sdk:${rootProject.ext.fbAdsSdk}"
+	implementation "com.unity3d.ads:unity-ads:${rootProject.ext.unityAds}"
+	implementation "com.applovin:applovin-sdk:${rootProject.ext.applovinSdk}"
+
+	implementation 'com.yandex.ads.mediation:mobileads-facebook:1.16.0'
+	implementation 'com.yandex.ads.mediation:mobileads-unityads:1.5.0'
+	implementation 'com.yandex.ads.mediation:mobileads-applovin:0.10.0'
+
+}

@@ -1,0 +1,13 @@
+{
+	"name": "extension-yandexads",
+	"url": "https://github.com/charmdev/extension-yandexads",
+	"license": "MIT",
+	"tags": ["ads", "android", "iOS"],
+	"description": "YANDEX (ads) extension (Android + iOS).",
+	"version": "1.0.0",
+	"dependencies": {
+		"extension-android-support-v4": ""
+	},
+	"contributors": ["charmdev"],
+	"releasenote": "Add warning if you forgot to set google play services version."
+}

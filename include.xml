@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project>
+	<section if="android">
+		<section unless="openfl-legacy || openfl-next">
+			<echo value="ALERT: Setting Android Support Library to the last version on your SDK. Please read how to upgrade and choose your version here: https://github.com/player-03/google-play-services" unless="supportLibraryVersion" />
+			<set name="supportLibraryVersion" value="+" unless="supportLibraryVersion" />
+		</section>
+		<section if="openfl-legacy || openfl-next">
+			<haxelib name="extension-android-support-v4" />
+		</section>
+		<dependency name="yandexads" path="dependencies/yandexads" />
+	</section>
+	<section if="ios">
+		<ios deployment="9.0"/> 
+		<ndll name="yandexadsex" />
+
+		<dependency path="frameworks/YandexMobileAds.framework" />
+		
+		
+	</section>
+
+</project>
