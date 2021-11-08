@@ -49,6 +49,13 @@ class YandexAds {
 		return canshow;
 	}
 
+	private static function clearCB() {
+		completeCB = null;
+		skipCB = null;
+		viewCB = null;
+		clickCB = null;
+	}
+
 	public static function showRewarded(cb, skip, displaying, click) {
 		
 		canshow = false;
@@ -83,25 +90,41 @@ class YandexAds {
 		{
 			trace("YandexAds REWARDED COMPLETED");
 			dispatchEventIfPossibleIS("CLOSED");
-			if (completeCB != null) completeCB();
+			if (completeCB != null)
+			{
+				completeCB();
+				clearCB();
+			}
 		}
 		else if (event == "yandex_rewardedskip")
 		{
 			trace("YandexAds REWARDED VIDEO IS SKIPPED");
 			dispatchEventIfPossibleIS("CLOSED");
-			if (skipCB != null) skipCB();
+			if (skipCB != null)
+			{
+				skipCB();
+				clearCB();
+			}
 		}
 		else if (event == "yandex_rewarded_displaying")
 		{
 			trace("YandexAds REWARDED VIDEO Displaying");
 			dispatchEventIfPossibleIS("DISPLAY");
-			if (viewCB != null) viewCB();
+			if (viewCB != null)
+			{
+				viewCB();
+				clearCB();
+			}
 		}
 		else if (event == "yandex_rewarded_click")
 		{
 			trace("YandexAds REWARDED VIDEO clicked");
 			dispatchEventIfPossibleIS("CLICK");
-			if (clickCB != null) clickCB();
+			if (clickCB != null)
+			{
+				clickCB();
+				clearCB();
+			}
 		}
 		
 	}
@@ -119,27 +142,43 @@ class YandexAds {
 	{
 		trace("YandexAds REWARDED Displaying");
 		dispatchEventIfPossibleIS("DISPLAY");
-		if (viewCB != null) viewCB();
+		if (viewCB != null)
+		{
+			viewCB();
+			clearCB();
+		}
 	}
 
 	public function onRewardedClick()
 	{
 		trace("YandexAds REWARDED click");
 		dispatchEventIfPossibleIS("CLICK");
-		if (clickCB != null) clickCB();
+		if (clickCB != null)
+		{
+			clickCB();
+			clearCB();
+		}
 	}
 
 	public function onRewardedCompleted()
 	{
 		trace("YandexAds REWARDED COMPLETED");
 		dispatchEventIfPossibleIS("CLOSED");
-		if (completeCB != null) completeCB();
+		if (completeCB != null)
+		{
+			completeCB();
+			clearCB();
+		}
 	}
 	public function onVideoSkipped()
 	{
 		trace("YandexAds REWARDED VIDEO IS SKIPPED");
 		dispatchEventIfPossibleIS("CLOSED");
-		if (skipCB != null) skipCB();
+		if (skipCB != null)
+		{
+			skipCB();
+			clearCB();
+		}
 	}
 	
 #end
