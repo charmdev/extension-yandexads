@@ -113,7 +113,6 @@ class YandexAds {
 			if (viewCB != null)
 			{
 				viewCB();
-				clearCB();
 			}
 		}
 		else if (event == "yandex_rewarded_click")
@@ -123,7 +122,6 @@ class YandexAds {
 			if (clickCB != null)
 			{
 				clickCB();
-				clearCB();
 			}
 		}
 		
@@ -145,7 +143,6 @@ class YandexAds {
 		if (viewCB != null)
 		{
 			viewCB();
-			clearCB();
 		}
 	}
 
@@ -156,7 +153,6 @@ class YandexAds {
 		if (clickCB != null)
 		{
 			clickCB();
-			clearCB();
 		}
 	}
 
