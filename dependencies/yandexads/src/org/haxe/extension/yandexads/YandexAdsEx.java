@@ -62,105 +62,111 @@ public class YandexAdsEx extends Extension
 		mRewardedAd = new RewardedAd(Extension.mainActivity);
 		mRewardedAd.setBlockId(YandexAdsEx.blockID);
 
-		mRewardedAd.setRewardedAdEventListener(
-			new RewardedAdEventListener() {
-				@Override
-				public void onAdLoaded() {
-					giveReward = false;
-					rewardSended = false;
-
-					if (Extension.mainView == null) return;
-					GLSurfaceView view = (GLSurfaceView) Extension.mainView;
-					view.queueEvent(new Runnable() {
-						public void run() {
-							_callback.call("onRewardedCanShow", new Object[] {});
-					}});
-				}
+		Extension.mainActivity.runOnUiThread(new Runnable() {
+			public void run() {
 				
-				@Override
-				public void onRewarded(final Reward reward) {
-					Log.d(TAG, "onRewardedVideoAdRewarded");
-					
-					giveReward = true;
-					rewardSended = false;
-				}
-				
-				@Override
-				public void onAdFailedToLoad(final AdRequestError error) {
-					Log.d(TAG, "onAdFailedToLoad " + error);
-					giveReward = false;
-					rewardSended = false;
-
-					failRewarded = true;
-
-					if (Extension.mainView == null) return;
-					GLSurfaceView view = (GLSurfaceView) Extension.mainView;
-					view.queueEvent(new Runnable() {
-						public void run() {
-							_callback.call("onVideoSkipped", new Object[] {});
-					}});
-				}
-				
-				@Override
-				public void onAdShown() {
-					Log.d(TAG, "onRewardedVideoAdShown");
-
-					if (Extension.mainView == null) return;
-					GLSurfaceView view = (GLSurfaceView) Extension.mainView;
-					view.queueEvent(new Runnable() {
-						public void run() {
-							_callback.call("onRewardedDisplaying", new Object[] {});
-					}});
-				}
-				
-				@Override
-				public void onAdDismissed() {
-					
-					Log.d(TAG, "onRewardedVideoAdDismissed " + giveReward + " " + rewardSended);
-
-					if (giveReward && !rewardSended) {
-						if (Extension.mainView == null) return;
-						GLSurfaceView view = (GLSurfaceView) Extension.mainView;
-						view.queueEvent(new Runnable() {
-							public void run() {
-								_callback.call("onRewardedCompleted", new Object[] {});
-						}});
-
-						Log.d(TAG, "onRewardedVideoAdClosed! giveReward");
-					}
-					else if (!giveReward && !rewardSended) {
-						if (Extension.mainView == null) return;
-						GLSurfaceView view = (GLSurfaceView) Extension.mainView;
-						view.queueEvent(new Runnable() {
-							public void run() {
-								_callback.call("onVideoSkipped", new Object[] {});
-						}});
-
-						Log.d(TAG, "onRewardedVideoAdClosed! !giveReward");
-					}
-
-					giveReward = false;
-					rewardSended = false;
-
-					new Handler().postDelayed(new Runnable() {
+				mRewardedAd.setRewardedAdEventListener(
+					new RewardedAdEventListener() {
 						@Override
-						public void run() {
-							YandexAdsEx.loadRewardedAd();
+						public void onAdLoaded() {
+							giveReward = false;
+							rewardSended = false;
+
+							if (Extension.mainView == null) return;
+							GLSurfaceView view = (GLSurfaceView) Extension.mainView;
+							view.queueEvent(new Runnable() {
+								public void run() {
+									_callback.call("onRewardedCanShow", new Object[] {});
+							}});
 						}
-					}, 5000);
-				}
-				
-				@Override
-				public void onLeftApplication() {
-					
-				}
-				
-				@Override
-				public void onReturnedToApplication() {
-					
-				}
+						
+						@Override
+						public void onRewarded(final Reward reward) {
+							Log.d(TAG, "onRewardedVideoAdRewarded");
+							
+							giveReward = true;
+							rewardSended = false;
+						}
+						
+						@Override
+						public void onAdFailedToLoad(final AdRequestError error) {
+							Log.d(TAG, "onAdFailedToLoad " + error);
+							giveReward = false;
+							rewardSended = false;
+
+							failRewarded = true;
+
+							if (Extension.mainView == null) return;
+							GLSurfaceView view = (GLSurfaceView) Extension.mainView;
+							view.queueEvent(new Runnable() {
+								public void run() {
+									_callback.call("onVideoSkipped", new Object[] {});
+							}});
+						}
+						
+						@Override
+						public void onAdShown() {
+							Log.d(TAG, "onRewardedVideoAdShown");
+
+							if (Extension.mainView == null) return;
+							GLSurfaceView view = (GLSurfaceView) Extension.mainView;
+							view.queueEvent(new Runnable() {
+								public void run() {
+									_callback.call("onRewardedDisplaying", new Object[] {});
+							}});
+						}
+						
+						@Override
+						public void onAdDismissed() {
+							
+							Log.d(TAG, "onRewardedVideoAdDismissed " + giveReward + " " + rewardSended);
+
+							if (giveReward && !rewardSended) {
+								if (Extension.mainView == null) return;
+								GLSurfaceView view = (GLSurfaceView) Extension.mainView;
+								view.queueEvent(new Runnable() {
+									public void run() {
+										_callback.call("onRewardedCompleted", new Object[] {});
+								}});
+
+								Log.d(TAG, "onRewardedVideoAdClosed! giveReward");
+							}
+							else if (!giveReward && !rewardSended) {
+								if (Extension.mainView == null) return;
+								GLSurfaceView view = (GLSurfaceView) Extension.mainView;
+								view.queueEvent(new Runnable() {
+									public void run() {
+										_callback.call("onVideoSkipped", new Object[] {});
+								}});
+
+								Log.d(TAG, "onRewardedVideoAdClosed! !giveReward");
+							}
+
+							giveReward = false;
+							rewardSended = false;
+
+							new Handler().postDelayed(new Runnable() {
+								@Override
+								public void run() {
+									YandexAdsEx.loadRewardedAd();
+								}
+							}, 5000);
+						}
+						
+						@Override
+						public void onLeftApplication() {
+							
+						}
+						
+						@Override
+						public void onReturnedToApplication() {
+							
+						}
+					}
+				);
+
 			}
-		);
+		});
 	}
 
 	public static void showRewarded() {
