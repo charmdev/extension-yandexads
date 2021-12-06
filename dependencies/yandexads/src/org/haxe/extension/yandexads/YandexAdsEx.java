@@ -1,10 +1,12 @@
 package org.haxe.extension.yandexads;
 
+import org.json.JSONObject;
 import android.util.Log;
 import org.haxe.extension.Extension;
 import org.haxe.lime.HaxeObject;
 import android.opengl.GLSurfaceView;
 import android.os.Handler;
+import androidx.annotation.Keep;
 
 import com.yandex.mobile.ads.common.InitializationListener;
 import com.yandex.mobile.ads.common.MobileAds;
@@ -14,6 +16,7 @@ import com.yandex.mobile.ads.common.AdRequestError;
 import com.yandex.mobile.ads.rewarded.Reward;
 import com.yandex.mobile.ads.rewarded.RewardedAd;
 import com.yandex.mobile.ads.rewarded.RewardedAdEventListener;
+import com.yandex.mobile.ads.common.ImpressionData;
 
 
 public class YandexAdsEx extends Extension
@@ -57,7 +60,7 @@ public class YandexAdsEx extends Extension
 			mRewardedAd = null;
 		}
 	}
-
+	
 	public static void createRewardedAd() {
 		mRewardedAd = new RewardedAd(Extension.mainActivity);
 		mRewardedAd.setBlockId(YandexAdsEx.blockID);
@@ -67,6 +70,29 @@ public class YandexAdsEx extends Extension
 				
 				mRewardedAd.setRewardedAdEventListener(
 					new RewardedAdEventListener() {
+
+						@Keep
+						public void onImpression(final ImpressionData impressionData)
+						{
+							if (impressionData != null)
+							{
+								final String allData =  impressionData.getRawData(); 
+
+								Log.d(TAG, "YANDEX rewarded onImpression " + allData);
+
+								if (Extension.mainView == null) return;
+								GLSurfaceView view = (GLSurfaceView) Extension.mainView;
+								view.queueEvent(new Runnable() {
+									public void run() {
+										_callback.call1("onRewardedImpressionData", allData);
+								}});
+							}
+							else
+							{
+								Log.d(TAG, "YANDEX rewarded onImpression == NULL");
+							}
+						}
+						
 						@Override
 						public void onAdLoaded() {
 							giveReward = false;
