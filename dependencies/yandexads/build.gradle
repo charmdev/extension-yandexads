@@ -25,8 +25,8 @@ dependencies {
 	implementation "com.unity3d.ads:unity-ads:${rootProject.ext.unityAds}"
 	implementation "com.applovin:applovin-sdk:${rootProject.ext.applovinSdk}"
 
+	implementation 'com.yandex.ads.mediation:mobileads-unityads:4.0.0.0'
 	implementation 'com.yandex.ads.mediation:mobileads-facebook:6.7.0.0'
-	implementation 'com.yandex.ads.mediation:mobileads-unityads:3.7.5.0'
 	implementation 'com.yandex.ads.mediation:mobileads-applovin:10.3.3.0'
 	implementation 'com.yandex.ads.mediation:mobileads-admob:20.4.0.0'
 

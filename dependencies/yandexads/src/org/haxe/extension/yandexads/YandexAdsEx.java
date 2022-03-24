@@ -19,6 +19,7 @@ import com.yandex.mobile.ads.rewarded.RewardedAdEventListener;
 import com.yandex.mobile.ads.common.ImpressionData;
 
 
+
 public class YandexAdsEx extends Extension
 {
 	protected YandexAdsEx () { }
@@ -63,7 +64,7 @@ public class YandexAdsEx extends Extension
 	
 	public static void createRewardedAd() {
 		mRewardedAd = new RewardedAd(Extension.mainActivity);
-		mRewardedAd.setBlockId(YandexAdsEx.blockID);
+		mRewardedAd.setAdUnitId(YandexAdsEx.blockID);
 
 		Extension.mainActivity.runOnUiThread(new Runnable() {
 			public void run() {
@@ -140,6 +141,11 @@ public class YandexAdsEx extends Extension
 								public void run() {
 									_callback.call("onRewardedDisplaying", new Object[] {});
 							}});
+						}
+
+						@Override
+						public void onAdClicked() {
+							Log.d(TAG, "onAdClicked ");
 						}
 						
 						@Override
