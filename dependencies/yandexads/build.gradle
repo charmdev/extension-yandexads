@@ -21,12 +21,10 @@ dependencies {
 	implementation "com.yandex.android:mobmetricalib:${rootProject.ext.yandexMobmetricalib}"
 
 	implementation "com.google.android.gms:play-services-ads:${rootProject.ext.playServicesAds}"
-	implementation "com.facebook.android:audience-network-sdk:${rootProject.ext.fbAdsSdk}"
 	implementation "com.unity3d.ads:unity-ads:${rootProject.ext.unityAds}"
 	implementation "com.applovin:applovin-sdk:${rootProject.ext.applovinSdk}"
 
 	implementation 'com.yandex.ads.mediation:mobileads-unityads:4.0.0.0'
-	implementation 'com.yandex.ads.mediation:mobileads-facebook:6.7.0.0'
 	implementation 'com.yandex.ads.mediation:mobileads-applovin:10.3.3.0'
 	implementation 'com.yandex.ads.mediation:mobileads-admob:20.4.0.0'
 
