@@ -25,10 +25,10 @@ dependencies {
 	implementation "com.applovin:applovin-sdk:${rootProject.ext.applovinSdk}"
 	implementation "com.my.target:mytarget-sdk:${rootProject.ext.mytargetSdk}"
 
-	implementation 'com.yandex.ads.mediation:mobileads-unityads:4.0.0.0'
-	implementation 'com.yandex.ads.mediation:mobileads-applovin:10.3.3.0'
-	implementation 'com.yandex.ads.mediation:mobileads-admob:20.4.0.0'
-	implementation 'com.yandex.ads.mediation:mobileads-mytarget:5.15.0.0'
+	implementation 'com.yandex.ads.mediation:mobileads-unityads:4.2.1.1'
+	implementation 'com.yandex.ads.mediation:mobileads-applovin:11.0.0.2'
+	implementation 'com.yandex.ads.mediation:mobileads-admob:21.1.0.0'
+	implementation 'com.yandex.ads.mediation:mobileads-mytarget:5.15.0.2'
 	
 
 }
